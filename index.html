@@ -8,7 +8,9 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     body {
-      background: linear-gradient(-45deg, #0f172a, #1e293b, #0f766e, #2563eb);
+      margin: 0;
+      /* Removed overflow: hidden to allow scrolling */
+      background: linear-gradient(-45deg, #0f172a, #1e293b, #0c2c29, #012675);
       background-size: 400% 400%;
       animation: gradientFlow 15s ease infinite;
     }
@@ -26,32 +28,46 @@
         background-position: 0% 50%;
       }
     }
+
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
   </style>
 </head>
 
 <body class="text-white font-sans">
+  <canvas id="bubbles"></canvas>
+
   <div class="max-w-5xl mx-auto px-6 py-20">
     <!-- Header -->
     <header class="text-center mb-16">
-      <img src="asset/Bede Ogbonna.jpg" alt="Bede Ogbonna" class="mx-auto rounded-full mb-6 w-32 h-32 object-cover border-4 border-teal-400 shadow-2xl" />
+      <img src="asset/Bede Ogbonna.jpg" alt="Bede Ogbonna"
+        class="mx-auto rounded-full mb-6 w-32 h-32 object-cover border-4 border-teal-400 shadow-2xl" />
       <h1 class="text-4xl font-extrabold tracking-tight">Bede Ogbonna</h1>
       <p class="text-lg text-teal-200 mt-2">Digital Marketing & Web Solutions Expert</p>
-      <p class="text-sm text-gray-200 mt-4 max-w-xl mx-auto">I help businesses grow with result-driven digital strategies, engaging websites, and strong online visibility.</p>
+      <p class="text-sm text-gray-200 mt-4 max-w-xl mx-auto">I help businesses grow with result-driven digital strategies,
+        engaging websites, and strong online visibility.</p>
     </header>
 
     <!-- Services -->
     <section>
       <h2 class="text-2xl font-semibold text-center mb-8 text-teal-300">Core Services</h2>
       <div class="grid gap-6 md:grid-cols-3">
-        <div class="bg-white/10 backdrop-blur-md p-6 rounded-2xl shadow-lg hover:scale-105 transform transition duration-300 border border-teal-500/30">
+        <div
+          class="bg-white/10 backdrop-blur-md p-6 rounded-2xl shadow-lg hover:scale-105 transform transition duration-300 border border-teal-500/30">
           <h3 class="text-lg font-semibold text-teal-200 mb-2">Social Media Management</h3>
           <p class="text-sm text-gray-200">Content calendars, visuals, and engagement tactics that grow your audience.</p>
         </div>
-        <div class="bg-white/10 backdrop-blur-md p-6 rounded-2xl shadow-lg hover:scale-105 transform transition duration-300 border border-teal-500/30">
+        <div
+          class="bg-white/10 backdrop-blur-md p-6 rounded-2xl shadow-lg hover:scale-105 transform transition duration-300 border border-teal-500/30">
           <h3 class="text-lg font-semibold text-teal-200 mb-2">Web Design & Landing Pages</h3>
           <p class="text-sm text-gray-200">Responsive, conversion-focused websites and modern revamps of existing ones.</p>
         </div>
-        <div class="bg-white/10 backdrop-blur-md p-6 rounded-2xl shadow-lg hover:scale-105 transform transition duration-300 border border-teal-500/30">
+        <div
+          class="bg-white/10 backdrop-blur-md p-6 rounded-2xl shadow-lg hover:scale-105 transform transition duration-300 border border-teal-500/30">
           <h3 class="text-lg font-semibold text-teal-200 mb-2">SEO & Local Visibility</h3>
           <p class="text-sm text-gray-200">Get found on Google, improve your rankings, and attract the right customers.</p>
         </div>
@@ -61,18 +77,57 @@
     <!-- CTA -->
     <section class="mt-20 text-center">
       <h2 class="text-xl font-semibold mb-4 text-teal-200">Let’s Work Together</h2>
-      <p class="text-sm text-gray-200 mb-6 max-w-md mx-auto">Whether you need a freelancer or a long-term digital partner, I’m ready to help you grow online.</p>
-      <a href="mailto:kceudes2@gmail.com" class="inline-block bg-teal-500 hover:bg-teal-600 text-white px-6 py-3 rounded-full font-bold shadow-md transition duration-300">
-        Contact Me
+      <p class="text-sm text-gray-200 mb-6 max-w-md mx-auto">Whether you need a freelancer or a long-term digital partner,
+        I’m ready to help you grow online.</p>
+      <a href="https://wa.me/2348132586920" target="_blank"
+        class="inline-block bg-teal-500 hover:bg-teal-600 text-white px-6 py-3 rounded-full font-bold shadow-md transition duration-300">
+        WhatsApp Me
       </a>
 
       <div class="mt-8 text-sm text-gray-300 space-y-1">
-        <p><strong>Email:</strong> <a href="mailto:bede@ecardcafe.com.ng" class="text-teal-300 underline">bede@ecardcafe.com.ng</a></p>
+        <p><strong>Email:</strong> <a href="mailto:bede@ecardcafe.com.ng"
+            class="text-teal-300 underline">bede@ecardcafe.com.ng</a></p>
         <p><strong>Phone:</strong> <a href="tel:+2348061371091" class="text-teal-300 underline">+234 806 137 1091</a></p>
         <p><strong>Portfolio:</strong> <a href="https://bede-ogbonna.vercel.app/" class="text-teal-300 underline">bede-ogbonna.vercel.app</a></p>
       </div>
     </section>
   </div>
+
+  <script>
+    const canvas = document.getElementById('bubbles');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const bubbles = Array.from({ length: 60 }, () => ({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      radius: Math.random() * 2 + 1,
+      speed: Math.random() * 1 + 0.5,
+    }));
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let bubble of bubbles) {
+        ctx.beginPath();
+        ctx.arc(bubble.x, bubble.y, bubble.radius, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.15)';
+        ctx.fill();
+        bubble.y += bubble.speed;
+        if (bubble.y > canvas.height) {
+          bubble.y = 0;
+          bubble.x = Math.random() * canvas.width;
+        }
+      }
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  </script>
 </body>
 
 </html>
