@@ -9,13 +9,36 @@
   <style>
     body {
       margin: 0;
-      /* Removed overflow: hidden to allow scrolling */
       background: linear-gradient(-45deg, #0f172a, #1e293b, #0c2c29, #012675);
       background-size: 400% 400%;
       animation: gradientFlow 15s ease infinite;
     }
 
     @keyframes gradientFlow {
+      0% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
+
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    .animated-name {
+      font-weight: 900;
+      font-size: 2.5rem;
+      background: linear-gradient(90deg, #0fffc1, #3d9dfc, #ff6ec4, #ffc36e);
+      background-size: 300% 300%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: colorFlow 4s ease infinite;
+    }
+
+    @keyframes colorFlow {
       0% {
         background-position: 0% 50%;
       }
@@ -44,9 +67,9 @@
   <div class="max-w-5xl mx-auto px-6 py-20">
     <!-- Header -->
     <header class="text-center mb-16">
-      <img src="asset/Bede Ogbonna.jpg" alt="Bede Ogbonna"
+      <img src="asset/Bede Ogbonna.png" alt="Bede Ogbonna"
         class="mx-auto rounded-full mb-6 w-32 h-32 object-cover border-4 border-teal-400 shadow-2xl" />
-      <h1 class="text-4xl font-extrabold tracking-tight">Bede Ogbonna</h1>
+      <h1 class="animated-name">Bede Ogbonna</h1>
       <p class="text-lg text-teal-200 mt-2">Digital Marketing & Web Solutions Expert</p>
       <p class="text-sm text-gray-200 mt-4 max-w-xl mx-auto">I help businesses grow with result-driven digital strategies,
         engaging websites, and strong online visibility.</p>
